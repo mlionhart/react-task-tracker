@@ -56,7 +56,7 @@ function App() {
   // Add Task
   const addTask = async (task) => {
     const res = await fetch(
-      "https://frozen-river-11954-4fdc380c8747.herokuapp.com/tasks",
+      "https://frozen-river-11954-4fdc380c8747.herokuapp.com/tasks/",
       {
         method: "POST",
         headers: {
@@ -85,7 +85,7 @@ function App() {
   // Delete Task
   const deleteTask = async (id) => {
     await fetch(
-      `https://frozen-river-11954-4fdc380c8747.herokuapp.com/tasks/${id}`,
+      `https://frozen-river-11954-4fdc380c8747.herokuapp.com/tasks/${id}/`,
       {
         method: "DELETE",
       }
@@ -100,7 +100,7 @@ function App() {
     const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder }
 
     const res = await fetch(
-      `https://frozen-river-11954-4fdc380c8747.herokuapp.com/tasks/${id}`,
+      `https://frozen-river-11954-4fdc380c8747.herokuapp.com/tasks/${id}/`,
       {
         method: "PUT",
         headers: {
