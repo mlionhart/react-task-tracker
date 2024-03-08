@@ -32,6 +32,9 @@ function App() {
     const res = await fetch(
       "https://frozen-river-11954-4fdc380c8747.herokuapp.com/tasks"
     );
+    if (!res.ok) {
+      throw new Error(`An error occurred: ${res.status}`);
+    }
     const data = await res.json();
 
     return data;
@@ -42,6 +45,9 @@ function App() {
     const res = await fetch(
       `https://frozen-river-11954-4fdc380c8747.herokuapp.com/tasks/${id}`
     );
+    if (!res.ok) {
+      throw new Error(`An error occurred: ${res.status}`);
+    }
     const data = await res.json();
 
     return data;
@@ -59,6 +65,10 @@ function App() {
         body: JSON.stringify(task),
       }
     );
+
+    if (!res.ok) {
+      throw new Error(`An error occurred: ${res.status}`);
+    }
 
     // data is just new task that's added. Need await because it returns a promise
     const data = await res.json();
