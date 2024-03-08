@@ -11,12 +11,6 @@
       "text": "Meeting at School",
       "day": "Feb 6th at 1:30pm",
       "reminder": false
-    },
-    {
-      "text": "Take Test",
-      "day": "Monday",
-      "reminder": true,
-      "id": 3
     }
   ]
 }
