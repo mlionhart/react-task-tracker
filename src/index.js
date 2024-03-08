@@ -11,6 +11,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Your other middleware and route handlers
+
+
 // This creates a root where the React components will render. It's pointing to the div with an id of "root" from the index.html.
 const root = ReactDOM.createRoot(document.getElementById('root'));
 // This line instructs React to render the <App /> component inside the root div from index.html.

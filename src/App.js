@@ -36,6 +36,7 @@ function App() {
       throw new Error(`An error occurred: ${res.status}`);
     }
     const data = await res.json();
+    console.log(data);
 
     return data;
   };
@@ -49,6 +50,8 @@ function App() {
       throw new Error(`An error occurred: ${res.status}`);
     }
     const data = await res.json();
+    console.log(data);
+
 
     return data;
   };
@@ -56,7 +59,7 @@ function App() {
   // Add Task
   const addTask = async (task) => {
     const res = await fetch(
-      "https://frozen-river-11954-4fdc380c8747.herokuapp.com/tasks/",
+      "https://frozen-river-11954-4fdc380c8747.herokuapp.com/tasks",
       {
         method: "POST",
         headers: {
