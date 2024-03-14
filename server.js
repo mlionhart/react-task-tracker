@@ -1,25 +1,33 @@
-// server.js
-
 const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser");
+const fs = require("fs").promises;
 const path = require("path");
-
-// Initialize express application
 const app = express();
 
-// Use body-parser middleware to handle JSON requests
-app.use(bodyParser.json());
-
-// Use cors middleware to handle CORS
+// Middleware
 app.use(cors());
+app.use(express.json()); // for parsing application/json
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, "react-task-tracker", "build")));
 
-// Define a route for the home page
-app.get("/", (req, res) => {
-  res.send("Welcome to the home page!");
+// GET /tasks/:id
+app.get("/tasks/:id", async (req, res) => {
+  const id = req.params.id;
+  // Fetch the task with this id from your db.json file
+  const data = JSON.parse(await fs.readFile("./db.json", "utf8"));
+  const task = data.find((task) => task.id === Number(id));
+  res.json(task);
+});
+
+// POST /tasks
+app.post("/tasks", async (req, res) => {
+  const newTask = req.body;
+  // Add the new task to your db.json file
+  const data = JSON.parse(await fs.readFile("./db.json", "utf8"));
+  data.push(newTask);
+  await fs.writeFile("./db.json", JSON.stringify(data));
+  res.json(newTask);
 });
 
 // The "catchall" handler: for any request that doesn't
