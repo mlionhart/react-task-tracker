@@ -3,7 +3,7 @@
 // The beauty of this structure is the ability to reuse components across different parts of your application.
 
 import { useState, useEffect, Fragment } from "react";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Tasks from "./components/Tasks";
