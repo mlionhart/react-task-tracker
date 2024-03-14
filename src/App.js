@@ -69,6 +69,9 @@ function App() {
       }
     );
 
+    console.log(`Status: ${res.status}`);
+    console.log(`Status Text: ${res.statusText}`);
+
     if (!res.ok) {
       throw new Error(`An error occurred: ${res.status}`);
     }
