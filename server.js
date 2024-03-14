@@ -15,7 +15,12 @@ app.use(express.static(path.join(__dirname, "react-task-tracker", "build")));
 app.get("/tasks/:id", async (req, res) => {
   const id = req.params.id;
   // Fetch the task with this id from your db.json file
-  const data = JSON.parse(await fs.readFile("./db.json", "utf8"));
+  let data;
+  try {
+    data = JSON.parse(await fs.readFile("./db.json", "utf8"));
+  } catch (err) {
+    data = [];
+  }
   const task = data.find((task) => task.id === Number(id));
   res.json(task);
 });
@@ -24,7 +29,12 @@ app.get("/tasks/:id", async (req, res) => {
 app.post("/tasks", async (req, res) => {
   const newTask = req.body;
   // Add the new task to your db.json file
-  const data = JSON.parse(await fs.readFile("./db.json", "utf8"));
+  let data;
+  try {
+    data = JSON.parse(await fs.readFile("./db.json", "utf8"));
+  } catch (err) {
+    data = [];
+  }
   data.push(newTask);
   await fs.writeFile("./db.json", JSON.stringify(data));
   res.json(newTask);
