@@ -12,11 +12,7 @@ app.use(express.json()); // for parsing application/json
 // Replace 'your-connection-string' with the actual connection string
 // connection string: mongodb+srv://lionrhart:<password>@cluster1.w0fuscu.mongodb.net/
 mongoose.connect(
-  "mongodb+srv://lionrhart:ImhFUGjsWXXNwb9W@cluster1.w0fuscu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
+  "mongodb+srv://lionrhart:ImhFUGjsWXXNwb9W@cluster1.w0fuscu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1"
 );
 
 mongoose.connection.on("connected", () => {
