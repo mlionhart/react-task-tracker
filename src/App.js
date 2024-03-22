@@ -10,6 +10,11 @@ import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 import About from "./components/About";
 
+const serverURL =
+  process.env.NODE_ENV === "production"
+    ? "https://frozen-river-11954-4fdc380c8747.herokuapp.com"
+    : "http://localhost:5000";
+
 function App() {
   // Adding another piece of state
   const [showAddTask, setShowAddTask] = useState(false);
@@ -30,8 +35,7 @@ function App() {
   // Fetch tasks
   const fetchTasks = async () => {
     const res = await fetch(
-      "https://frozen-river-11954-4fdc380c8747.herokuapp.com/tasks"
-    );
+      `${serverURL}/tasks`);    
     if (!res.ok) {
       throw new Error(`An error occurred: ${res.status}`);
     }
@@ -43,9 +47,7 @@ function App() {
 
   // Fetch task
   const fetchTask = async (id) => {
-    const res = await fetch(
-      `https://frozen-river-11954-4fdc380c8747.herokuapp.com/tasks/${id}`
-    );
+    const res = await fetch(`${serverURL}/tasks/${id}`);
     if (!res.ok) {
       throw new Error(`An error occurred: ${res.status}`);
     }
@@ -58,16 +60,13 @@ function App() {
 
   // Add Task
   const addTask = async (task) => {
-    const res = await fetch(
-      "https://frozen-river-11954-4fdc380c8747.herokuapp.com/tasks",
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(task),
-      }
-    );
+    const res = await fetch(`${serverURL}/tasks`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(task),
+    });
 
     console.log(`Status: ${res.status}`);
     console.log(`Status Text: ${res.statusText}`);
@@ -90,12 +89,9 @@ function App() {
 
   // Delete Task
   const deleteTask = async (id) => {
-    await fetch(
-      `https://frozen-river-11954-4fdc380c8747.herokuapp.com/tasks/${id}/`,
-      {
-        method: "DELETE",
-      }
-    );
+    await fetch(`${serverURL}/tasks/${id}/`, {
+      method: "DELETE",
+    });
 
     setTasks(tasks.filter((task) => task.id !== id));
   };
@@ -105,16 +101,13 @@ function App() {
     const taskToToggle = await fetchTask(id)
     const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder }
 
-    const res = await fetch(
-      `https://frozen-river-11954-4fdc380c8747.herokuapp.com/tasks/${id}/`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(updTask),
-      }
-    );
+    const res = await fetch(`${serverURL}/tasks/${id}/`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(updTask),
+    });
 
     // data is updated task
     const data = await res.json()
